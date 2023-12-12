@@ -128,7 +128,7 @@ def post_detail(post_id):
     post = Post.query.get(post_id)
     if post:
         comments = post.comments.filter_by(type='comment').all()
-        like_count = LikesAndComments.query.filter_by(post_id=post.id, type='like').count()
+        like_count = ost.like_count()
         return render_template('post_detail.html', post=post, comments=comments, like_count=like_count)
     return jsonify({'error': 'Post not found'}), 404
 

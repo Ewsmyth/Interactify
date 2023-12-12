@@ -136,6 +136,9 @@ class Post(db.Model):
         self.post_content = f'userposts/{unique_filename}'
         db.session.add(self)
 
+    def like_count(self):
+        return Like.query.filter_by(post_id=self.id).count()
+
 class Follow(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     follower_id = db.Column(db.Integer, db.ForeignKey('user.id'))

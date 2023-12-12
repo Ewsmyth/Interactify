@@ -12,7 +12,7 @@ def create_app():
     app.config['UPLOAD_FOLDER'] = 'website/static/userposts'
 
     # Database configuration
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////var/lib/docker/volumes/interactify_data/_data/interactify.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////var/lib/docker/volumes/interactify_data/interactify.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize Flask-Login
