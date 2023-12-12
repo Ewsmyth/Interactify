@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search</title>
+  <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+<body>
+  <form id="searchForm" action="{{ url_for('views.search') }}" method="GET">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" name="query" placeholder="Search">
+      <button type="submit" id="searchSubmit"></button>
+    </div>
+  </form>
+  <div class="search-container" id="searchContainer">
+  <div class="search-results">
+    <ul>
+      {% for user in search_results %}
+        <li>
+          <a href="{{ url_for('views.profile', user_id=user.id) }}">
+            <div class="user-info">
+              <img src="{{ url_for('static', filename=user.profile_picture) }}" alt="Profile Picture">
+              <div class="user-name">
+                <div class="name" id="username1">{{ user.username }}</div>
+                <div class="name" id="username2">{{ user.firstname }} {{ user.lastname }}</div>
+              </div>
+            </div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  </div>
+</body>
+</html>
+{% endblock %}
+
+<script src="{{ url_for('static', filename='search.js') }}"></script>

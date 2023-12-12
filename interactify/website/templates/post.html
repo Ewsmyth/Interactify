@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/post.css') }}">
+</head>
+<body>
+  <div class="headerPost">
+    <h3 class="pageTitle">New Post</h3>
+    <div class="rbtnBox">
+      <a class="resetbtn" href="{{ url_for('views.post') }}"></a>
+    </div>
+  </div>
+    <form method="POST" action="/post" enctype="multipart/form-data">
+      <div class="textBox">
+        <textarea id="post_content" name="post_content" rows="4" cols="50" placeholder="What's on your mind?"></textarea><br><br>
+      </div>
+
+        <div class="chooseFile">
+          <label for="media_file">Photo/video</label><br>
+          <input type="file" id="media_file" name="media_file" accept="image/*, video/*" onchange="updateLabel(this)"><br><br>        
+        </div>
+        
+        <input class="share" type="submit" value="Share">
+    </form>    
+</body>
+</html>
+{% endblock %}
+
+<script src="{{ url-for('static', filename='post.js') }}"></script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/accountsettings.css') }}">
+</head>
+<body>
+
+<div class="header">
+  <!-- Back Button -->
+  <div class="headerBtns">
+    <a href="{{ url_for('views.profile', user_id=viewed_user.id) }}">
+      <button class="headbut" id="backBtn"></button>
+    </a>
+  </div>
+  <!-- Page Name -->
+  <div class="headerBanner">
+    <h1 class="acctset-page-name">Edit Profile</h1>
+  </div>
+  <!-- Reset Button -->
+  <div class="headerBtns">
+    <a href="{{ url_for('views.accountsettings', user_id=viewed_user.id) }}">
+      <button class="headbut" id="resetBtn"></button>
+    </a>
+  </div>
+</div>
+
+<div class="settingsBox">
+  <form id="accountSettingsForm" action="{{ url_for('views.accountsettings') }}" method="POST" enctype="multipart/form-data">
+
+    <!-- User Bio -->
+    <div class="input-group">
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="new_bio">{{ viewed_user.bio }}</textarea>
+    </div>
+
+    <!-- User Profile Picture -->
+    <div class="input-group">
+      <label for="profilePicture">Profile Picture</label>
+      <input type="file" id="profilePicture" name="new_profile_picture">
+    </div>
+
+    <!--User Gender-->
+    <div class="input-group">
+      <label for="gender">Gender</label>
+      <select class="gender-input" id="gender" name="gender" value="{{ viewed_user.gender }}" required>
+        <option value="" disabled selected>*Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="AH-64">AH-64 Apache Attack Helicopter</option>
+        <option value="other">Rather not say</option>
+      </select>
+    </div>
+
+    <!-- User Username -->
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="new_username" value="{{ viewed_user.username }}" required>
+    </div>
+
+    <!-- User First Name -->
+    <div class="input-group">
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" name="new_firstname" value="{{ viewed_user.firstname }}" required>
+    </div>
+
+    <!-- User Last Name -->
+    <div class="input-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" id="lastname" name="new_lastname" value="{{ viewed_user.lastname }}" required>
+    </div>
+
+    <div class="saveBox">
+      <button class="saveChangesBtn" type="submit">Save Changes</button>
+    </div>
+
+  </form>
+</div>
+
+</body>
+</html>

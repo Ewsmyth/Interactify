@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.interactify-logo {
+    height: 30px;
+    width: 160px;
+    background: url('../icons/interactify_logo.png') no-repeat;
+    background-size: contain;
+    margin-left: 6px;
+}
+
+.home-post-container {
+    height: auto;
+    overflow: scroll;
+    margin: 0 0 74px 0;
+}

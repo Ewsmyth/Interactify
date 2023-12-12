@@ -1,0 +1,194 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin: 1px 1px 0 1px;
+}
+
+.username1 {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 80%;
+    overflow: hidden;
+}
+
+.username2 {
+    margin: 0 0 0 10px;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.menu1 {
+    height: 50px;
+    width: 50px;
+    border: none;
+    position: relative;
+}
+
+.menu2 {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-radius: 15%;
+    font-size: 12px;
+    background: url('../icons/menu1.png');
+    background-size: contain;
+}
+
+.menu2:hover {
+    background-color: rgba(170, 170, 170, 0.521);
+}
+
+.dropdown-container {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    display: none;
+}
+
+.dropdown-content {
+    position: relative;
+    background-color: rgba(255, 255, 255, 1);
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: rgba(139, 139, 139, 1);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dropdown-container a:hover {
+    color: rgba(0, 0, 0, 1);
+    border-bottom: 2px solid rgba(0, 0, 0, 1);
+}
+
+.menu1:hover .dropdown-container {
+    display: block;
+}
+
+.profileBanner{
+    display: flex;
+}
+
+.left h3 {
+    margin: 0;
+}
+
+#profilePicture {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 6px;
+}
+
+.right {
+    display: flex;
+    margin-left: 35px;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 27px;
+    height: 100%;
+}
+
+.profile-stats h2 {
+    margin: 0;
+}
+
+.statsRefBtn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.number {
+    font-size: 19px;
+    font-weight: bolder;
+    font-family: sans-serif;
+}
+
+.label{
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+.users-name {
+    margin: 0 0 0 6px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.user-bio-box {
+    max-height: 100px;
+    margin-left: 6px;
+}
+
+.user-bio {
+    height: 50px;
+    overflow: scroll;
+    margin: 0;
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.follow-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.follow-btn-primary {
+    background-color: rgba(56, 135, 255, 1);
+    color: white;
+}
+
+.follow-btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.profile-post-container {
+    height: auto;
+    overflow: scroll;
+    margin: 0 0 74px 0;
+}

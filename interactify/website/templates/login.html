@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+<div class="header">
+  <h1 class="logo">Interactify</h1>
+  <h3 class="banner">Log Into Interactify</h3>
+</div>
+<div>
+<form method="POST">
+    <div class="form-group">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+    </div>
+    <br />
+    <a href="{{ url_for('views.home') }}"><button type="submit" class="login_button">Login</button></a>
+</form>
+<div class="signup_container">
+  <a href="{{ url_for('auth.signup') }}"><button type="submit" class="signup_button">Create new account</button></a>
+</div>
+</div>
+</body>
+</html>

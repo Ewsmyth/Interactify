@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+<body>
+<div>
+  <div class="logo-container">
+    <h1 class="logo">Interactify</h1>
+    <h3 class="banner">Sign Up</h3>
+  </div>
+    <form method="post" action="{{ url_for('auth.signup') }}" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="username" name="username" placeholder="*Username"/>
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" name="email" placeholder="*Email"/>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="firstname" name="firstname" placeholder="*First name"/>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="lastname" name="lastname" placeholder="*Last name"/>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" id="gender" name="gender">
+            <option value="" disabled selected>*Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="AH-64">AH-64 Apache Attack Helicopter</option>
+            <option value="other">Rather not say</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" id="password1" name="password1" placeholder="*Password"/>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="*Confirm Password"/>
+        </div>
+
+        <div class="input-container">
+          <label for="profile_picture" class="file-label">Upload Profile Picture</label>
+          <input type="file" name="profile_picture" id="profile_picture" class="file-input">
+        </div> 
+
+        <br />
+
+        <button type="submit" class="submit-button">Sign Up</button>
+
+    </form>
+
+    <div class="back-button">
+      <a href="{{ url_for('auth.login') }}"><button type="submit" class="have-an-account">Already have an account?</button></a>
+    </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => { const fileInput = document.getElementById('profile_picture'); });
+</script>
+
+</body>
+</html>

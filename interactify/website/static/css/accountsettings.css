@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1px 1px 40px 1px;
+}
+
+.headerBtns {
+    height: 50px;
+    width: 50px;
+    border-radius: 25%;
+}
+
+.headbut {
+    width: 100%;
+    height: 100%;
+    border-radius: 25%;
+}
+
+#backBtn {
+    background: url('../icons/arrow_left.png');
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+}
+
+#backBtn:hover {
+    background-color: rgba(129, 125, 125, 0.548);
+}
+
+.headerBanner {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 275px;
+}
+
+.acctset-page-name {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 25px;
+}
+
+#resetBtn {
+    background: url('../icons/reset.png');
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+}
+
+#resetBtn:hover {
+    background-color: rgba(129, 125, 125, 0.548);
+}
+
+.settingsBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin: 0 3px 6px 3px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+#bio {
+    height: 100%;
+    font-family: sans-serif;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    background-color: transparent;
+}
+
+.gender-input{
+    height: 40px;
+    font-family: sans-serif;
+    font-size: 25px;
+    border: none;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    background-color: transparent;
+}
+
+#username {
+    height: 40px;
+    font-family: sans-serif;
+    font-size: 25px;
+    text-align: left;
+    border: none;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    background-color: transparent;
+}
+
+#firstname {
+    height: 40px;
+    font-family: sans-serif;
+    font-size: 25px;
+    text-align: left;
+    border: none;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    background-color: transparent;
+}
+
+#lastname {
+    height: 40px;
+    font-family: sans-serif;
+    font-size: 25px;
+    text-align: left;
+    border: none;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    background-color: transparent;
+}
+
+.saveBox {
+    height: 120px;
+    display: flex;
+    justify-content: center;
+}
+
+.saveChangesBtn {
+    border: none;
+    height: 55px;
+    width: 300px;
+    border-radius: 5vw;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 1);
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: 27px;
+}
+
+.saveChangesBtn:hover {
+    background-color: rgba(129, 125, 125, 0.548);
+}

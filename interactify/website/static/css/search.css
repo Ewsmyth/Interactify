@@ -1,0 +1,126 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(36, 94, 180);
+}
+
+#searchForm {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(36, 94, 180);
+    z-index: 999;
+    padding: 10px;
+}
+
+.search-wrapper {
+    display: flex;
+    justify-content: left;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1vh;
+    width: 95%;
+}
+
+#searchInput {
+    display: block;
+    padding: 10px 10px 10px 35px;
+    width: 100%;
+    border-radius: 1vh;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    height: 22px;
+    background: url('../icons/search.png') no-repeat 10px center;
+    background-size: 20px 20px;
+}
+
+#searchInput:focus {
+    outline: none;
+}
+
+#searchInput:not(:placeholder-shown) + #searchSubmit {
+    display: block;
+}
+
+#searchSubmit {
+    display: none;
+    background-image: url('../icons/arrow.png');
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+    border-radius: 0 2vh 2vh 0;
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin-right: 0;
+}
+
+.search-container {
+    margin-top: 65px;
+}
+
+.search-results {
+    margin-top: 0;
+    margin-bottom: 100px;
+}
+
+.search-results ul {
+    list-style: none;
+    padding: 0;
+}
+
+.search-results li {
+    margin-bottom: 0;
+}
+
+.search-results a {
+    text-decoration: none;
+}
+
+.user-info {
+    display: flex;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.user-info img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 35px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.user-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-left: 30px;
+    margin-top: auto;
+}
+
+.name {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#username1 {
+    font-size: larger;
+    color: rgb(255, 255, 255);
+    margin-bottom: 3px;
+}
+
+#username2 {
+    font-size: small;
+    color: rgb(122, 121, 121);
+    margin-bottom: 20px;
+}

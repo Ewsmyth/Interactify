@@ -1,0 +1,90 @@
+body {
+    background-color: rgba(56, 135, 255, 1);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Modak', cursive;
+    font-weight: normal;
+    font-size: 75px;
+    color: rgb(255, 255, 255);
+    margin-top: 50px;
+}
+
+.banner {
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    margin-bottom: 60px;
+    margin-top: -80px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-control {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5vw;
+    margin-bottom: 15px;
+    text-align: left;
+    width: 300px;
+    height: 55px;
+    padding-left: 20px;
+    font-size: 32px;
+    overflow: hidden;
+}
+
+.form-control::placeholder {
+    font-size: 32px;
+}
+
+.login_button {
+    background-color: rgb(255, 255, 255);
+    color: rgba(56, 135, 255, 1);
+    cursor: pointer;
+    height: 55px;
+    width: 250px;
+    border: none;
+    border-radius: 5vw;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    font-size: 25px;
+}
+
+.login_button:hover {
+    background-color: rgb(38, 92, 172);
+    color: rgb(255, 255, 255);
+}
+
+.signup_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup_button {
+    background-color: rgb(255, 255, 255);
+    color: rgba(56, 135, 255, 1);
+    cursor: pointer;
+    height: 55px;
+    width: 250px;
+    border: none;
+    border-radius: 5vw;
+    font-size: 25px;
+    margin-bottom: 200px;
+}
+.signup_button:hover {
+    background-color: rgb(38, 92, 172);
+    color: rgb(255, 255, 255);
+}

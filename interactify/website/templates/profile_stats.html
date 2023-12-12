@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Stats</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile_stats.css') }}">
+</head>
+<body>
+  <div class="header">
+    <div class="headerBtn">
+      <a href="{{ url_for('views.profile', user_id=viewed_user.id) }}">
+        <button class="headbut" id="backBtn"></button>
+      </a>
+    </div>
+    <div class="headerBanner">
+      <h1 class="profileStatsPageName">{{ viewed_user.username }}</h1>
+    </div>
+  </div>
+
+  <div class="pageBtns">
+    <button class="tab" id="followers">Followers</button>
+    <button class="tab" id="following">Following</button>
+  </div>
+
+  <div class="container">
+    <div class="carousel">
+      <div class="slider">
+        <section class="followers-section">
+          <ul>
+            {% for follower in followers %}
+              <li>
+                <a href="{{ url_for('views.profile', user_id=follower.follower_user.id) }}">
+                  <div class="user-info">
+                    <img src="{{ url_for('static', filename=follower.follower_user.profile_picture) }}" alt="Profile Picture">
+                    <div class="user-name">
+                      <div class="name" id="username1">{{ follower.follower_user.username }}</div>
+                      <div class="name" id="username2">{{ follower.follower_user.firstname }} {{ follower.follower_user.lastname }}</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="following-section">
+          <ul>
+            {% for followed in following %}
+              <li>
+                <a href="{{ url_for('views.profile', user_id=followed.followed_user.id) }}">
+                  <div class="user-info">
+                    <img src="{{ url_for('static', filename=followed.followed_user.profile_picture) }}" alt="Profile Picture">
+                    <div class="user-name">
+                      <div class="name" id="username1">{{ followed.followed_user.username }}</div>
+                      <div class="name" id="username2">{{ followed.followed_user.firstname }} {{ followed.followed_user.lastname }}</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>        
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/profile_stats.js') }}"></script>
+
+</body>
+</html>

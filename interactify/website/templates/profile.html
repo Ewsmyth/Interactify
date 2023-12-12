@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile_header.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/post_container.css') }}">
+</head>
+<body>
+
+<div class="header">
+<!--The left side of the header displays the user's username-->
+  <div class="username1">
+    <h1 class="username2">{{ viewed_user.username }}</h1>
+  </div>
+<!--The menu dropdown allows the user to change their profile settings and logout-->  
+  <div class="menu1">
+    {% if is_own_profile %}
+      <button class="menu2"></button>
+      <div class="dropdown-container">
+        <div class="dropdown-content" id="dropdownContent">
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+          <a href="{{ url_for('views.accountsettings')}}">Account Settings</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="profileBanner">
+<!--The left side of the profile banner displays the user's profile picture-->
+  <div class="left">
+    <img id="profilePicture" src="{{ url_for('static', filename=viewed_user.profile_picture) }}" alt="Profile Picture">
+  </div>
+<!--Profile stats displays the user's posts, followers, and following-->
+  <div class="right">
+    <div class="profile-stats" id="posts">
+      <h2 class="number">{{ number_of_posts }}</h2>
+      <h2 class="label">Posts</h2>
+    </div>
+    <div class="profile-stats" id="followers">
+      <a class="statsRef" href="{{ url_for('views.profile_stats', user_id=viewed_user.id) }}">
+        <button class="statsRefBtn">
+          <h2 class="number">{{ number_of_followers }}</h2>
+          <h2 class="label">Followers</h2>
+        </button>
+      </a>
+    </div>
+    <div class="profile-stats" id="following">
+      <a class="statsRef" href="{{ url_for('views.profile_stats', user_id=viewed_user.id) }}">
+        <button class="statsRefBtn">
+          <h2 class="number">{{ number_of_following }}</h2>
+          <h2 class="label">Following</h2>
+        </button>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="users-name-box">
+  <h1 class="users-name">{{ viewed_user.firstname }} {{ viewed_user.lastname }}</h1>
+</div>
+
+<div class="user-bio-box">
+  <p id="userBio" class="user-bio">{{ viewed_user.bio }}</p>
+</div>
+
+<div>
+  {% if not is_own_profile %}
+    {% if current_user.is_following(viewed_user) %}
+      <form action="{{ url_for('views.unfollow', user_id=viewed_user.id) }}" method="post">
+        <button type="submit" class="follow-btn follow-btn-danger">Unfollow</button>
+      </form>
+    {% else %}
+      <form action="{{ url_for('views.follow', user_id=viewed_user.id) }}" method="post">
+        <button type="submit" class="follow-btn follow-btn-primary">Follow</button>
+      </form>
+    {% endif %}
+  {% endif %}
+</div>
+
+<div class="profile-post-container">
+  {% for post in user_posts %}
+    {% include 'post_container.html' %}
+  {% endfor %}
+</div>
+
+</body>
+</html>
+{% endblock %}
