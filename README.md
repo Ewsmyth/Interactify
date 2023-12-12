@@ -13,5 +13,9 @@
 #   The period is for if you are inside the "Interactify" directory if you are not then you should replace this with the path to the Interactify directory
 
 # $ sudo docker volume create interactify_data
+#   If you have already setup these volumes and you are just updating the app then you don't need to create the volumes again
 
-# $ sudo docker run -d -p 8585:8585 -v interactify_data:/var/lib/docker/volumes/interactify_data -v ~/Interactify:/Interactify interactify-image
+# $ sudo docker volume create interactify_userposts
+#   If you have already setup these volumes and you are just updating the app then you don't need to create the volumes again
+
+# $ sudo docker run -d -p 8585:8585 -v interactify_data:/var/lib/docker/volumes/interactify_data -v interactify_userposts:/var/lib/docker/volumes/interactify_userposts -v ~/Interactify:/Interactify interactify-image
