@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, current_app, flash, jsonify, make_response, send_from_directory
+from flask import Blueprint, render_template, redirect, url_for, request, current_app, flash, jsonify, make_response, send_file
 from flask_login import login_required, current_user
 from website.models import User, Post, Follow, Comment, Like
 from website import db
@@ -270,6 +270,7 @@ def delete_post(post_id):
 
     return redirect(url_for('views.home'))  # Redirect to the homepage or any desired page after deletion
 
-@views.route('/userposts/<path:filename>')
-def user_uploaded_files(filename):
-    return send_from_directory('/var/lib/docker/volumes/interactify_userposts/_data', filename)
+@views.route('/media/<path:filename>')
+def get_media(filename):
+    media_folder = '/var/lib/docker/volumes/interactify_userposts/_data/'
+    return send_file(media_folder + filename)
