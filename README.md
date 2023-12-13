@@ -65,7 +65,7 @@ sudo docker build -t interactify-image .
 ```
 sudo docker volume create interactify_data
 ```
-## Setup the userposts database for persistent storage
+## Setup the userposts volume for persistent storage of user uploaded images and videos
 ```
 sudo docker volume create interactify_userposts
 ```
