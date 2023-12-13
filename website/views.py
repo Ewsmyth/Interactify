@@ -273,4 +273,9 @@ def delete_post(post_id):
 @views.route('/media/<path:filename>')
 def get_media(filename):
     media_folder = '/var/lib/docker/volumes/interactify_userposts/_data/'
-    return send_file(media_folder + filename)
+    file_path = os.path.join(media_folder, filename)
+
+    if os.path.exists(file_path):
+        return send_file(file_path)
+    else:
+        return "File not found", 404
