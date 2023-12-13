@@ -93,7 +93,7 @@ class User(db.Model, UserMixin):
             unique_filename = generate_unique_filename(self.username, file_extension)
             image_path = os.path.join(upload_folder, unique_filename)
             image_file.save(image_path)
-            self.profile_picture = unique_filename
+            self.profile_picture = f'/var/lib/docker/volumes/interactify_userposts/_data/{unique_filename}'
             print("File saved successfully.")
         except Exception as e:
             print(f"Error saving file: {e}")
@@ -127,13 +127,13 @@ class Post(db.Model):
         unique_filename = self.generate_unique_filename(file_extension)
         image_path = os.path.join(upload_folder, unique_filename)
         image_file.save(image_path)
-        self.post_content = unique_filename
+        self.post_content = f'/var/lib/docker/volumes/interactify_userposts/_data/{unique_filename}'
 
     def save_video(self, video_file, upload_folder):
         unique_filename = self.generate_unique_filename('mp4')
         video_path = os.path.join(upload_folder, unique_filename)
         video_file.save(video_path)
-        self.post_content = unique_filename
+        self.post_content = f'/var/lib/docker/volumes/interactify_userposts/_data/{unique_filename}'
         db.session.add(self)
 
     def like_count(self):
