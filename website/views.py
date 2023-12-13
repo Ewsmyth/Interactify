@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, current_app, flash, jsonify, make_response, send_file
+from flask import Blueprint, render_template, redirect, url_for, request, current_app, flash, jsonify, make_response
 from flask_login import login_required, current_user
 from website.models import User, Post, Follow, Comment, Like
 from website import db
@@ -36,6 +36,7 @@ def profile(user_id):
 @views.route('/accountsettings', methods=['GET', 'POST'])
 @login_required
 def accountsettings():
+
     viewed_user = User.query.get(current_user.id)
 
     if request.method == 'POST':
@@ -48,8 +49,8 @@ def accountsettings():
 
         user = User.query.get(current_user.id)
 
-        if new_bio or new_bio == '':
-            user.bio = new_bio if new_bio != '' else f"About {user.firstname} {user.lastname}"
+        if new_bio or new_bio == '':  # Check if new_bio is provided or empty
+            user.bio = new_bio if new_bio != '' else f"About {user.firstname} {user.lastname}"  # Set new bio or default bio
 
         if new_username:
             user.username = new_username
@@ -66,7 +67,6 @@ def accountsettings():
         if new_profile_picture:
             try:
                 user.save_profile_picture(new_profile_picture, current_app.config['UPLOAD_FOLDER'])
-                user.save_profile_picture(new_profile_picture, current_app.config['BACKUP_FOLDER'])
             except ValueError as e:
                 flash(str(e))
                 return redirect(url_for('views.accountsettings'))
@@ -93,26 +93,29 @@ def post():
 
         if post_content or media_file:
             if media_file:
-                if media_file.mimetype.startswith('image/') or media_file.mimetype.startswith('video/'):
+                if media_file.mimetype.startswith('image/'):
                     upload_folder = current_app.config['UPLOAD_FOLDER']
-                    backup_folder = current_app.config['BACKUP_FOLDER']
-
-                    if media_file.mimetype.startswith('image/'):
-                        post_type = 'image'
-                    else:
-                        post_type = 'video'
-
+                    image_post = Post(author_id=current_user.id, post_type='image')
                     try:
-                        new_post = Post(author_id=current_user.id, post_type=post_type)
-                        new_post.author = current_user
-                        new_post.save_media(media_file, upload_folder, backup_folder)
-                        db.session.add(new_post)
+                        image_post.author = current_user
+                        image_post.save_image(media_file, upload_folder)  # Use 'media_file' here
+                        db.session.add(image_post)
+                    except ValueError as e:
+                        return render_template('error.html', error=str(e))
+
+                elif media_file.mimetype.startswith('video/'):
+                    upload_folder = current_app.config['UPLOAD_FOLDER']
+                    video_post = Post(author_id=current_user.id, post_type='video')
+                    try:
+                        video_post.author = current_user
+                        video_post.save_video(media_file, upload_folder)  # Use 'media_file' here
+                        db.session.add(video_post)
                     except ValueError as e:
                         return render_template('error.html', error=str(e))
 
             if post_content:
-                new_post = Post(author_id=current_user.id, post_type='text', post_content=post_content)
-                db.session.add(new_post)
+                post = Post(author_id=current_user.id, post_type='text', post_content=post_content)
+                db.session.add(post)
             
             db.session.commit()  # Move commit outside the condition to handle all posts
 
@@ -125,7 +128,7 @@ def post_detail(post_id):
     post = Post.query.get(post_id)
     if post:
         comments = post.comments.filter_by(type='comment').all()
-        like_count = ost.like_count()
+        like_count = LikesAndComments.query.filter_by(post_id=post.id, type='like').count()
         return render_template('post_detail.html', post=post, comments=comments, like_count=like_count)
     return jsonify({'error': 'Post not found'}), 404
 
@@ -246,23 +249,3 @@ def get_comments(post_id):
         comments_data = [{'comment_content': comment.comment_content} for comment in comments]
         
     return render_template('home.html', followed_posts=followed_posts)
-
-@views.route('/delete_post/<int:post_id>', methods=['POST'])
-@login_required
-def delete_post(post_id):
-    post_to_delete = Post.query.get_or_404(post_id)
-
-    if post_to_delete:
-        # Check if the current user is the author of the post
-        if current_user.id == post_to_delete.author_id:
-            # Delete associated likes and comments
-            Like.query.filter_by(post_id=post_id).delete()
-            Comment.query.filter_by(post_id=post_id).delete()
-
-            db.session.delete(post_to_delete)
-            db.session.commit()
-            flash('Post deleted successfully', 'success')
-        else:
-            flash('You are not authorized to delete this post', 'error')
-
-    return redirect(url_for('views.home'))  # Redirect to the homepage or any desired page after deletion

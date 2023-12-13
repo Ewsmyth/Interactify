@@ -114,26 +114,27 @@ class Post(db.Model):
     def generate_unique_filename(self, file_extension):
         return generate_unique_filename(self.author.username, file_extension)
 
-    def save_media(self, media_file, upload_folder, backup_folder):
-        _, file_extension = os.path.splitext(media_file.filename)
+    def save_image(self, image_file, upload_folder):
+        _, file_extension = os.path.splitext(image_file.filename)
+        print(f"File extension: {file_extension}")
+
         file_extension = file_extension.lower().lstrip('.')
-        allowed_extensions = {'jpg', 'jpeg', 'gif', 'png', 'mp4'}
+        allowed_extensions = {'jpg', 'jpeg', 'gif', 'png'}
 
         if file_extension not in allowed_extensions:
-            raise ValueError('Invalid file extension')
+            raise ValueError('Invalid image file extension')
 
         unique_filename = self.generate_unique_filename(file_extension)
-        upload_path = os.path.join(upload_folder, unique_filename)
-        backup_path = os.path.join(backup_folder, unique_filename)
+        image_path = os.path.join(upload_folder, unique_filename)
+        image_file.save(image_path)
+        self.post_content = f'userposts/{unique_filename}'
 
-        media_file.save(upload_path)
-        media_file.save(backup_path)  # Save to the backup folder as well
-
-        self.post_content = f'userposts/{unique_filename}'  # Save the filename to the post_content field
+    def save_video(self, video_file, upload_folder):
+        unique_filename = self.generate_unique_filename('mp4')
+        video_path = os.path.join(upload_folder, unique_filename)
+        video_file.save(video_path)
+        self.post_content = f'userposts/{unique_filename}'
         db.session.add(self)
-
-    def like_count(self):
-        return Like.query.filter_by(post_id=self.id).count()
 
 class Follow(db.Model):
     id = db.Column(db.Integer, primary_key=True)

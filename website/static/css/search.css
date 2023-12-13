@@ -37,10 +37,6 @@ body, html {
     background-size: 20px 20px;
 }
 
-#searchInput:focus {
-    outline: none;
-}
-
 #searchInput:not(:placeholder-shown) + #searchSubmit {
     display: block;
 }

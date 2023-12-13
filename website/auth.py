@@ -61,7 +61,6 @@ def signup():
         if new_profile_picture:
             try:
                 new_user.save_profile_picture(new_profile_picture, current_app.config['UPLOAD_FOLDER'])
-                new_user.save_profile_picture(new_profile_picture, current_app.config['BACKUP_FOLDER'])
             except ValueError as e:
                 flash(str(e))
                 return redirect(url_for('auth.signup'))
