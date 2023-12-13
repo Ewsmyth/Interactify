@@ -93,29 +93,26 @@ def post():
 
         if post_content or media_file:
             if media_file:
-                if media_file.mimetype.startswith('image/'):
+                if media_file.mimetype.startswith('image/') or media_file.mimetype.startswith('video/'):
                     upload_folder = current_app.config['UPLOAD_FOLDER']
-                    image_post = Post(author_id=current_user.id, post_type='image')
-                    try:
-                        image_post.author = current_user
-                        image_post.save_image(media_file, upload_folder)  # Use 'media_file' here
-                        db.session.add(image_post)
-                    except ValueError as e:
-                        return render_template('error.html', error=str(e))
+                    backup_folder = current_app.config['BACKUP_FOLDER']
 
-                elif media_file.mimetype.startswith('video/'):
-                    upload_folder = current_app.config['UPLOAD_FOLDER']
-                    video_post = Post(author_id=current_user.id, post_type='video')
+                    if media_file.mimetype.startswith('image/'):
+                        post_type = 'image'
+                    else:
+                        post_type = 'video'
+
                     try:
-                        video_post.author = current_user
-                        video_post.save_video(media_file, upload_folder)  # Use 'media_file' here
-                        db.session.add(video_post)
+                        new_post = Post(author_id=current_user.id, post_type=post_type)
+                        new_post.author = current_user
+                        new_post.save_media(media_file, upload_folder, backup_folder)
+                        db.session.add(new_post)
                     except ValueError as e:
                         return render_template('error.html', error=str(e))
 
             if post_content:
-                post = Post(author_id=current_user.id, post_type='text', post_content=post_content)
-                db.session.add(post)
+                new_post = Post(author_id=current_user.id, post_type='text', post_content=post_content)
+                db.session.add(new_post)
             
             db.session.commit()  # Move commit outside the condition to handle all posts
 
@@ -269,13 +266,3 @@ def delete_post(post_id):
             flash('You are not authorized to delete this post', 'error')
 
     return redirect(url_for('views.home'))  # Redirect to the homepage or any desired page after deletion
-
-@views.route('/media/<path:filename>')
-def get_media(filename):
-    media_folder = '/var/lib/docker/volumes/interactify_userposts/_data/'
-    file_path = os.path.join(media_folder, filename)
-
-    if os.path.exists(file_path):
-        return send_file(file_path)
-    else:
-        return "File not found", 404
