@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, current_app, flash, jsonify, make_response
+from flask import Blueprint, render_template, redirect, url_for, request, current_app, flash, jsonify, make_response, send_from_directory
 from flask_login import login_required, current_user
 from website.models import User, Post, Follow, Comment, Like
 from website import db
