@@ -15,7 +15,7 @@
 
   {% if post.post_type == 'image' %}
     <div class="post-content">
-      <img src="/static/userposts/{{ post.post_content }}" alt="User Post">
+      <img src="/static/{{ post.post_content }}" alt="User Post">
     </div>
   {% elif post.post_type == 'video' %}
     <div class="post-content">
