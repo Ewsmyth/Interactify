@@ -269,3 +269,7 @@ def delete_post(post_id):
             flash('You are not authorized to delete this post', 'error')
 
     return redirect(url_for('views.home'))  # Redirect to the homepage or any desired page after deletion
+
+@views.route('/userposts/<path:filename>')
+def user_uploaded_files(filename):
+    return send_from_directory('/var/lib/docker/volumes/interactify_userposts/_data', filename)
