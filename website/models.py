@@ -93,7 +93,7 @@ class User(db.Model, UserMixin):
             unique_filename = generate_unique_filename(self.username, file_extension)
             image_path = os.path.join(upload_folder, unique_filename)
             image_file.save(image_path)
-            self.profile_picture = f'{unique_filename}'
+            self.profile_picture = f'userposts/{unique_filename}'
             print("File saved successfully.")
         except Exception as e:
             print(f"Error saving file: {e}")
