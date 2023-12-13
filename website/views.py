@@ -36,7 +36,6 @@ def profile(user_id):
 @views.route('/accountsettings', methods=['GET', 'POST'])
 @login_required
 def accountsettings():
-
     viewed_user = User.query.get(current_user.id)
 
     if request.method == 'POST':
@@ -49,8 +48,8 @@ def accountsettings():
 
         user = User.query.get(current_user.id)
 
-        if new_bio or new_bio == '':  # Check if new_bio is provided or empty
-            user.bio = new_bio if new_bio != '' else f"About {user.firstname} {user.lastname}"  # Set new bio or default bio
+        if new_bio or new_bio == '':
+            user.bio = new_bio if new_bio != '' else f"About {user.firstname} {user.lastname}"
 
         if new_username:
             user.username = new_username
@@ -67,6 +66,7 @@ def accountsettings():
         if new_profile_picture:
             try:
                 user.save_profile_picture(new_profile_picture, current_app.config['UPLOAD_FOLDER'])
+                user.save_profile_picture(new_profile_picture, current_app.config['BACKUP_FOLDER'])
             except ValueError as e:
                 flash(str(e))
                 return redirect(url_for('views.accountsettings'))
