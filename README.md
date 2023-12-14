@@ -68,7 +68,14 @@ sudo docker build -t interactify-image .
 ```
 sudo docker volume create interactify_data
 ```
+## Setup the userposts volume for persistent storage
+```
+sudo docker volume create interactify_userposts
+```
 ## Install Interactify
 ```
-sudo docker run -d -p 8585:8585 --restart=unless-stopped -v interactify_data:/var/lib/docker/volumes/interactify_data -v ~/Interactify:/Interactify interactify-image
+sudo docker run -d -p 8585:8585 --restart=unless-stopped \
+    -v interactify_data:/var/lib/docker/volumes/interactify_data \
+    -v interactify_userposts:/website/static/userposts \
+    interactify-image
 ```
