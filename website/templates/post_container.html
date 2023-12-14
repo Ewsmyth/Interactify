@@ -4,6 +4,13 @@
       <img class="userProfilePicture" src="{{ url_for('static', filename=post.user.profile_picture) }}" alt="Profile Picture">
       <h1 class="username">{{ post.user.username }}</h1>
     </div>
+    {% if current_user.is_authenticated and current_user.id == post.user.id %}
+      <div>
+        <form class="delete-post-form" action="{{ url_for('views.delete_post', post_id=post.id) }}" method="POST">
+          <button type="submit" class="delete-post-button"></button>
+        </form>
+      </div>
+    {% endif %}
   </a>
 
   {% if post.post_type == 'image' %}
@@ -46,17 +53,21 @@
 
   </div>
 
+  <div class="like-count-section">
+    <p>{{ post.like_count() }} Likes</p>
+  </div>
+
   <div class="comments-section">
-    <button class="toggle-comments-btn">View Comments</button>
-    <ul class="cmnt-list show-cmnt-list close-cmnt-list">
+    <button onclick="viewComments(this)" class="toggle-comments-btn">Comments</button>
+    <ul class="cmnt-list">
       {% for comment in post.comments %}
-        <li class="comment">
-          <p class="cmnt-content">
-            <strong class="cmnt-owner"><a href="{{ url_for('views.profile', user_id=comment.user.id) }}">{{ comment.user.username }}</a>:</strong> {{ comment.comment_content }}
+        <li class="comment child-cmnt">
+          <p class="cmnt-content child-cmnt">
+            <strong class="cmnt-owner child-cmnt"><a href="{{ url_for('views.profile', user_id=comment.user.id) }}">{{ comment.user.username }}</a>:</strong> {{ comment.comment_content }}
           </p>
           {% if comment.author_id == current_user.id or post.user.id == current_user.id %}
-            <form class="delete-comment-form" action="{{ url_for('views.delete_comment', comment_id=comment.id) }}" method="POST">
-              <button type="submit" class="delete-comment-btn"></button>
+            <form class="delete-comment-form child-cmnt" action="{{ url_for('views.delete_comment', comment_id=comment.id) }}" method="POST">
+              <button type="submit" class="delete-comment-btn child-cmnt"></button>
             </form>
           {% endif %}
         </li>

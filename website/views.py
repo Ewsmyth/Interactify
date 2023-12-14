@@ -249,3 +249,23 @@ def get_comments(post_id):
         comments_data = [{'comment_content': comment.comment_content} for comment in comments]
         
     return render_template('home.html', followed_posts=followed_posts)
+
+@views.route('/delete_post/<int:post_id>', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post_to_delete = Post.query.get_or_404(post_id)
+
+    if post_to_delete:
+        # Check if the current user is the author of the post
+        if current_user.id == post_to_delete.author_id:
+            # Delete associated likes and comments
+            Like.query.filter_by(post_id=post_id).delete()
+            Comment.query.filter_by(post_id=post_id).delete()
+
+            db.session.delete(post_to_delete)
+            db.session.commit()
+            flash('Post deleted successfully', 'success')
+        else:
+            flash('You are not authorized to delete this post', 'error')
+
+    return redirect(url_for('views.home'))

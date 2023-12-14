@@ -6,6 +6,9 @@
 }
 
 .user-info-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     text-decoration: none;
     font-family: sans-serif;
     font-weight: 600;
@@ -34,6 +37,27 @@
     margin-left: 10px;
 }
 
+.delete-post-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 25%;
+}
+
+.delete-post-form:hover {
+    background-color: rgba(160, 154, 154, 0.644);
+}
+
+.delete-post-button {
+    background-image: url(../icons/delete.png);
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+}
+
 .post-content {
     margin-bottom: 0;
     max-width: 100%;
@@ -57,12 +81,31 @@
 
 .like-and-comment {
     display: flex;
-    align-items: center;
-    width: 400px;
+    width: 100%;
     height: 30px;
 }
 
+.liking-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.like-count-section {
+    display: flex;
+}
+
+.like-count-section p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
 .liking-section button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: transparent;
     background-size: cover;
     border: none;
@@ -80,21 +123,29 @@
     width: 25px;
 }
 
+.post-comment-section {
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    width: 100%;
+}
+
 .comment-form {
     display: flex;
     height: 25px;
     align-items: center;
     margin-left: 5px;
+    width: 97%;
 }
 
 .comment-form input {
     height: 25px;
-    width: 310px;
     font-family: sans-serif;
     border: none;
+    width: 100%;
 }
 
-.comment-form input[type="text"]:focus {
+.comment-form input:focus {
     outline: none;
     border-bottom: .4px solid rgba(160, 154, 154, 0.644);
 }
@@ -129,12 +180,12 @@
     border-radius: 3px;
     font-family: sans-serif;
     font-weight: 500;
-    font-size: 9px;
+    font-size: 15px;
     color: rgba(0, 0, 0, 1);
     background-color: transparent;
-    width: 70px;
     margin-bottom: 4px;
     text-align: center;
+    width: 20%;
     padding: 1.5px 0;
     margin-left: 2px;
 }
@@ -145,36 +196,27 @@
 
 .cmnt-list {
     display: none;
-}
-
-.show-cmnt-list {
-    display: block;
     margin: 0;
-    padding: 0;
-}
-
-.close-cmnt-list {
-    margin: 0;
-    padding: 0;
+    padding: 0 0 0 3px;
 }
 
 .comment {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 3px;
+    margin-bottom: 7px;
 }
 
 .cmnt-content {
     margin: 0;
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 15px;
     color: rgba(0, 0, 0, 1);
 }
 
 .cmnt-owner {
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 15px;
     color: rgba(0, 0, 0, 1);
     padding-left: 2px;
 }
@@ -182,7 +224,7 @@
 .cmnt-owner a {
     text-decoration: none;
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 15px;
     color: rgba(0, 0, 0, 1);
 }
 
@@ -193,8 +235,8 @@
     border: none;
     background: url(../icons/delete.png) no-repeat;
     background-size: contain;
-    height: 12px;
-    width: 12px;
+    height: 17px;
+    width: 17px;
     background-color: transparent;
 }
 
