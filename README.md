@@ -1,7 +1,7 @@
 # Interactify
  Social Media Website
 
-## Update Ubuntu Server
+###### Update Ubuntu Server
 ```
 sudo apt update && sudo apt upgrade -y
 ```
